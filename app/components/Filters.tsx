@@ -72,8 +72,8 @@ export function Filters({
 
   return (
     <div>
-      <form className="flex items-center justify-between gap-6">
-        <fieldset className="flex gap-4">
+      <form className="flex items-center justify-between gap-6 flex-wrap">
+        <fieldset className="flex gap-4 flex-wrap">
           {locationsValues.map((loc) => (
             <CheckboxButton
               key={loc.value}
@@ -102,7 +102,6 @@ export function Filters({
             onChange={handleBedroomChange}
             name="bedroom"
             id="type"
-            // value={bedroom || ""}
             value={filters.bedroom || ""}
           >
             <option value="" disabled>
