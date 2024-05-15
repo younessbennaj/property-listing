@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Filters } from "./components/Filters";
 import { Property, Location } from "./types";
+import Image from "next/image";
+import { PropertyCard } from "./components/PropertyCard";
 
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -40,7 +42,6 @@ export default function Home() {
 
   return (
     <div>
-      {/* create a unique filter data */}
       <Filters
         filters={filters}
         onFilterChange={(filters) => {
@@ -51,12 +52,13 @@ export default function Home() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div>
-            {filteredProperties.map((property) => (
-              <div key={property.id}>
-                <h2>{property.title}</h2>
-              </div>
-            ))}
+          <div className="mx-auto my-0 w-fit">
+            <h2>Over 200 stays</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProperties.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
           </div>
         )}
       </div>
