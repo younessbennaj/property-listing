@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Filters } from "./components/Filters";
 import { Property, Location } from "./types";
 import Image from "next/image";
+import { PropertyCard } from "./components/PropertyCard";
 
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -41,7 +42,6 @@ export default function Home() {
 
   return (
     <div>
-      {/* create a unique filter data */}
       <Filters
         filters={filters}
         onFilterChange={(filters) => {
@@ -52,42 +52,13 @@ export default function Home() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className="flex flex-col gap-[72px]">
-            {filteredProperties.map((property) => (
-              <div
-                className="border border-gray-400 rounded-lg max-w-[335px] mx-auto my-0"
-                key={property.id}
-              >
-                <Image
-                  className="w-full h-[200px] object-cover rounded-t-lg"
-                  src={property.image}
-                  alt=""
-                  width={335}
-                  height={200}
-                />
-                <div className="p-5">
-                  <h2 className="mb-2 font-semibold">{property.title}</h2>
-                  <p className="text-sm text-gray-600">
-                    {property.description}
-                  </p>
-                  <div className="flex">
-                    <div className="text-xs text-gray-600">
-                      {property.capacity.bedroom} bedroom
-                    </div>
-                    <div className="text-xs text-gray-600">
-                      {property.capacity.people} guests
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-xl">
-                      ${property.price}
-                      <span className="text-sm">/night</span>
-                    </div>
-                    <div className="text-sm">{property.rating}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mx-auto my-0 w-fit">
+            <h2>Over 200 stays</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProperties.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
           </div>
         )}
       </div>
