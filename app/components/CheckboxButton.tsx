@@ -27,9 +27,12 @@ export function CheckboxButton({
         onChange={onChange}
       />
       <div
-        className={classNames("cursor-pointer px-4 py-2 rounded-lg", {
-          "bg-blue-600 text-white": checked,
-        })}
+        className={classNames(
+          "cursor-pointer px-4 py-2 rounded-lg text-sm text-white",
+          {
+            "bg-[#4A5567] text-white": checked,
+          }
+        )}
       >
         {label}
       </div>

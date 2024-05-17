@@ -5,7 +5,7 @@ export function PropertyCard({ property }: { property: Property }) {
   return (
     <div
       key={property.id}
-      className="rounded-lg w-[358px] border border-gray-600"
+      className="rounded-xl w-[358px] border border-gray-600"
     >
       <div className="relative">
         {property.superhost && (
