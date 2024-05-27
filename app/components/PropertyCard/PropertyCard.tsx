@@ -3,7 +3,8 @@ import { Property } from "../../types";
 
 export function PropertyCard({ property }: { property: Property }) {
   return (
-    <div
+    <li
+      aria-label={property.title}
       key={property.id}
       className="rounded-xl w-[358px] border border-gray-600"
     >
@@ -44,6 +45,6 @@ export function PropertyCard({ property }: { property: Property }) {
           <div className="text-sm text-white">{property.rating}</div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }

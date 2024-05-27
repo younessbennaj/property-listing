@@ -65,18 +65,21 @@ export default function Home() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className="mx-auto my-0 w-fit">
+          <div className="mx-auto my-0 w-fit pb-16">
             {filteredProperties.length === 0 && (
               <h2 className="text-white text-xl mb-8 mt-12">No stays found</h2>
             )}
             {filteredProperties.length !== 0 && (
               <h2 className="text-white text-xl mb-8 mt-12">Over 200 stays</h2>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ul
+              aria-label="a property listing"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {filteredProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
-            </div>
+            </ul>
           </div>
         )}
       </div>
