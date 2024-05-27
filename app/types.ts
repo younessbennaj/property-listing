@@ -1,4 +1,10 @@
-export type Location = "all" | "norway" | "finland" | "sweden" | "switzerland";
+export type PropertyLocation =
+  | "all"
+  | "norway"
+  | "finland"
+  | "sweden"
+  | "switzerland";
+
 export type Property = {
   id: number;
   title: string;

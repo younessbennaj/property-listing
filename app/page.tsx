@@ -1,16 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Filters } from "./components/Filters";
-import { Property, Location } from "./types";
-import { PropertyCard } from "./components/PropertyCard";
+import { Filters } from "./components/Filters/Filters";
+import { Property, PropertyLocation } from "./types";
+import { PropertyCard } from "./components/PropertyCard/PropertyCard";
 
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const [filters, setFilters] = useState<{
-    locations: Location[];
+    locations: PropertyLocation[];
     superhost: boolean;
     bedroom: number | null;
   }>({
@@ -24,7 +24,9 @@ export default function Home() {
     if (superhost && !property.superhost) return false;
     if (bedroom && property.capacity.bedroom !== bedroom) return false;
     if (locations.includes("all")) return true;
-    if (!locations.includes(property.location.toLowerCase() as Location))
+    if (
+      !locations.includes(property.location.toLowerCase() as PropertyLocation)
+    )
       return false;
     return true;
   });
