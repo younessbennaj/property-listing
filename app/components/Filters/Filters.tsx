@@ -1,47 +1,10 @@
-import { CheckboxButton } from "./CheckboxButton";
 import { Field, Label, Select, Switch } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import LocationFilter from "../LocationFilter/LocationFilter";
+import { PropertyLocation } from "../../types";
+import { FiltersProps } from "./types";
 
-type Location = "all" | "norway" | "finland" | "sweden" | "switzerland";
-
-const locationsValues = [
-  {
-    name: "All Stays",
-    value: "all",
-  },
-  {
-    name: "Norway",
-    value: "norway",
-  },
-  {
-    name: "Finland",
-    value: "finland",
-  },
-  {
-    name: "Sweden",
-    value: "sweden",
-  },
-  {
-    name: "Switzerland",
-    value: "switzerland",
-  },
-];
-
-export function Filters({
-  filters,
-  onFilterChange,
-}: {
-  filters: {
-    locations: Location[];
-    superhost: boolean;
-    bedroom: number | null;
-  };
-  onFilterChange: (filters: {
-    locations: Location[];
-    superhost: boolean;
-    bedroom: number | null;
-  }) => void;
-}) {
+export function Filters({ filters, onFilterChange }: FiltersProps) {
   function handleSuperhostChange(checked: boolean) {
     onFilterChange({ ...filters, superhost: checked });
   }
@@ -59,7 +22,7 @@ export function Filters({
       if (e.target.checked) {
         onFilterChange({
           ...filters,
-          locations: [...filters.locations, value as Location],
+          locations: [...filters.locations, value as PropertyLocation],
         });
       } else {
         onFilterChange({
@@ -73,29 +36,11 @@ export function Filters({
   return (
     <div className="bg-[#20293A] px-10 py-8 rounded-xl mx-[72px] translate-y-[-50%]">
       <form className="flex items-center justify-between gap-6 flex-wrap">
-        <fieldset className="flex gap-3 flex-wrap justify-center">
-          {locationsValues.map((loc) => (
-            <CheckboxButton
-              key={loc.value}
-              id={loc.value}
-              label={loc.name}
-              name="location"
-              value={loc.value}
-              checked={filters.locations.includes(loc.value as Location)}
-              onChange={handleCheckboxChange}
-            />
-          ))}
-        </fieldset>
+        <LocationFilter
+          filtredLocations={filters.locations}
+          onLocationChange={handleCheckboxChange}
+        />
         <Field className="flex items-center gap-2">
-          {/* <label>
-            <input
-              onChange={handleSuperhostChange}
-              type="checkbox"
-              name="superhost"
-              id="superhost"
-            />
-            Superhost
-          </label> */}
           <Switch
             checked={filters.superhost}
             onChange={handleSuperhostChange}
